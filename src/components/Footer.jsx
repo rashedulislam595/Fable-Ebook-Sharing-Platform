@@ -61,12 +61,8 @@ export default function Footer() {
                                 placeholder="rashedulislam956581@gmail.com"
                                 variant="bordered"
                                 size="sm"
-                                // Apply component-wide wrapper styles directly using className
                                 className="bg-slate-900/40 text-white rounded-md max-w-xs"
-                                classNames={{
-                                    inputWrapper: "border-slate-700 hover:border-slate-600 focus-within:!border-indigo-500",
-                                    input: "text-slate-200 placeholder:text-slate-500 text-xs"
-                                }}
+                                
                             />
                             <Button
                                 size="sm"
