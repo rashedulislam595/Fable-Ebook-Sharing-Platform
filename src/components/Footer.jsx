@@ -66,7 +66,7 @@ export default function Footer() {
                             />
                             <Button
                                 size="sm"
-                                className="bg-indigo-600 text-white font-medium hover:bg-indigo-500 transition-colors px-4 h-9"
+                                className="bg-linear-to-r from-[#EF573E] to-[#FADA59] text-black font-bold rounded-md duration-1000 transition hover:bg-linear-to-r hover:from-[#FADA59] hover:to-[#EF573E] hover:text-white shadow-sm px-4 h-9"
                             >
                                 Join
                             </Button>

@@ -31,7 +31,7 @@ export default function HeroSection() {
                         <Link href='/' >
                             <Button
                                 variant="bordered"
-                                className="border border-slate-300 bg-white/50 text-slate-800 font-medium px-8 h-12 hover:border-gray-400 hover:bg-slate-200 rounded-md  transition-all backdrop-blur-sm"
+                                className=" font-medium px-8 h-12 bg-slate-900 text-white hover:bg-slate-800 transition-all  rounded-md  backdrop-blur-sm"
                                 radius="sm"
                             >
                                 Learn More

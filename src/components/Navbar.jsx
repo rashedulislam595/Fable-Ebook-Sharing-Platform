@@ -98,7 +98,7 @@ export default function Navbar() {
               </div>:<>
               <Link
                 href="/login">
-                <Button variant="secondary" className="text-sm  font-medium text-slate-700 transition hover:text-indigo-600  rounded-md" >Sign In</Button>
+                <Button variant="secondary" className="text-sm bg-slate-900 text-white font-medium hover:bg-slate-800 transition-all  rounded-md" >Sign In</Button>
               </Link>
 
               <Link href={'/register'}>

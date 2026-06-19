@@ -75,7 +75,15 @@ export default function RegisterPage() {
 
     const handleGoogleLogin = async () => {
         try {
-            // Todo: BetterAuth সোশ্যাল সাইন-ইন লজিক
+            const data = await authClient.signIn.social({
+                provider: "google",
+            });
+            if(data){
+                toast.success("Welcome back! You've successfully signed in with Google.", {
+                    position: 'top-center',
+                    theme: 'dark'
+                })
+            }
         } catch (err) {
             console.error("Google Auth Error:", err);
         }
@@ -314,7 +322,7 @@ export default function RegisterPage() {
                                 <Button
                                     type="submit"
                                     isLoading={loading}
-                                    className="w-full h-12 rounded-xl bg-slate-900 text-white font-medium hover:bg-slate-800 transition-all shadow-sm"
+                                    className="w-full h-12 rounded-xl font-extrabold bg-linear-to-r from-[#EF573E] to-[#FADA59] text-black duration-1000 transition hover:bg-linear-to-r hover:from-[#FADA59] hover:to-[#EF573E] hover:text-white shadow-sm"
                                 >
                                     {!loading && (
                                         <div className="flex items-center justify-center gap-2 w-full">
@@ -341,7 +349,7 @@ export default function RegisterPage() {
                                     <Button
                                         type="button"
                                         onClick={handleGoogleLogin}
-                                        className="h-12 rounded-xl border border-slate-200 bg-white text-slate-700 w-full flex items-center justify-center gap-2 hover:bg-slate-50 hover:border-slate-300 transition-all font-medium shadow-sm"
+                                        className="w-full h-12 rounded-xl bg-slate-900 text-white font-medium hover:bg-slate-800 transition-all shadow-sm"
                                     >
                                         <FaGoogle size={14} className="text-red-500" />
                                         Google
