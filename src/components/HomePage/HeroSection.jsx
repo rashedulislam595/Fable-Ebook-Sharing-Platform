@@ -22,7 +22,7 @@ export default function HeroSection() {
                     <div className="flex flex-wrap gap-4 pt-2">
                         <Link href='/'>
                             <Button
-                                className="bg-[#090D16] text-white font-medium px-8 h-12 rounded-md hover:bg-slate-800 transition-all shadow-sm"
+                                className="bg-linear-to-r from-[#EF573E] to-[#FADA59] text-black font-medium px-8 h-12 rounded-md duration-1000 transition hover:bg-linear-to-r hover:from-[#FADA59] hover:to-[#EF573E] hover:text-white shadow-sm"
                                 radius="sm"
                             >
                                 Browse Ebooks
