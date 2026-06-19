@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, Input, Button } from "@heroui/react";
+import Image from "next/image";
 
 export default function Footer() {
     return (
@@ -11,12 +12,20 @@ export default function Footer() {
 
                     {/* Brand Column */}
                     <div className="lg:col-span-4 flex flex-col space-y-4">
-                        <div className="flex items-center gap-2">
-                            
-                            <span className="text-xl font-serif font-semibold text-white tracking-wide">
-                                Fable
-                            </span>
-                        </div>
+                        <div className="flex gap-2 items-center">
+                                  {/* LOGO */}
+                                <Link href="/" className="flex items-center">
+                                  <Image
+                                    src="/images/logo.png"
+                                    alt="Logo"
+                                    width={60}
+                                    height={50}
+                                    priority
+                                    className="w-full h-full"
+                                  />
+                                </Link>
+                                <h2 className="bg-linear-to-r from-[#EF573E] to-[#FADA59] bg-clip-text text-3xl font-extrabold tracking-tight text-transparent" >Fable</h2>
+                                </div>
                         <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
                             The focused atmosphere for modern readers. Crafting the future of independent publishing.
                         </p>
