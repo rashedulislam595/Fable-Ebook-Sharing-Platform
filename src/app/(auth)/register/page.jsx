@@ -6,8 +6,12 @@ import { FiUser, FiMail, FiLock, FiArrowRight, FiEye, FiEyeOff, FiBookOpen, FiEd
 import { FaGoogle } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
+import { authClient } from "@/lib/auth-client";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
+    const router = useRouter()
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -18,7 +22,7 @@ export default function RegisterPage() {
         email: "",
         password: "",
         confirmPassword: "",
-        role: "reader", 
+        role: "reader",
     });
 
     const handleChange = (e) => {
@@ -46,8 +50,22 @@ export default function RegisterPage() {
 
         try {
             setLoading(true);
-            // Todo: BetterAuth setup(formData.role সহ)
-            console.log("Registration Successful", formData);
+
+            const { data, error } = await authClient.signUp.email({
+                name: formData.name, 
+                email: formData.email, // required
+                password: formData.password, // required
+                role: formData.role,
+                callbackURL: "/",
+            });
+
+            if(data){
+                toast.success("Account created successfully!",{position:'top-center', theme:'dark'})
+                router.push('/login')
+            }else{
+                toast.error(error.message,{position:'top-center', theme:'dark'})
+            }
+            
         } catch (err) {
             setError(err.message || "Registration failed. Email might already be in use.");
         } finally {
@@ -84,7 +102,7 @@ export default function RegisterPage() {
                         </h1>
 
                         <p className="text-slate-500 text-lg leading-relaxed max-w-md">
-                            Join a premium community of passionate writers and avid readers. 
+                            Join a premium community of passionate writers and avid readers.
                             Publish your own ebooks or dive into thousands of stories shared by others.
                         </p>
 
@@ -121,7 +139,7 @@ export default function RegisterPage() {
                                 <div className="w-3 h-3 rounded-full bg-violet-600" />
                                 <h2 className="text-xl font-bold tracking-tight text-violet-600 font-serif">
                                     Fable
-                               </h2>
+                                </h2>
                             </div>
 
                             <div className="mb-8">
@@ -244,11 +262,10 @@ export default function RegisterPage() {
                                         {/* Reader Card */}
                                         <div
                                             onClick={() => handleRoleSelect("reader")}
-                                            className={`p-4 rounded-xl border-2 flex items-center gap-3 cursor-pointer select-none transition-all duration-200 ${
-                                                formData.role === "reader"
+                                            className={`p-4 rounded-xl border-2 flex items-center gap-3 cursor-pointer select-none transition-all duration-200 ${formData.role === "reader"
                                                     ? "border-violet-600 bg-violet-50/40 text-violet-700 shadow-sm"
                                                     : "border-slate-200 bg-slate-50/50 hover:bg-slate-50 text-slate-600"
-                                            }`}
+                                                }`}
                                         >
                                             <div className={`p-2 rounded-lg ${formData.role === "reader" ? "bg-violet-100" : "bg-slate-200/60"}`}>
                                                 <FiBookOpen size={18} />
@@ -262,11 +279,10 @@ export default function RegisterPage() {
                                         {/* Writer Card */}
                                         <div
                                             onClick={() => handleRoleSelect("writer")}
-                                            className={`p-4 rounded-xl border-2 flex items-center gap-3 cursor-pointer select-none transition-all duration-200 ${
-                                                formData.role === "writer"
+                                            className={`p-4 rounded-xl border-2 flex items-center gap-3 cursor-pointer select-none transition-all duration-200 ${formData.role === "writer"
                                                     ? "border-violet-600 bg-violet-50/40 text-violet-700 shadow-sm"
                                                     : "border-slate-200 bg-slate-50/50 hover:bg-slate-50 text-slate-600"
-                                            }`}
+                                                }`}
                                         >
                                             <div className={`p-2 rounded-lg ${formData.role === "writer" ? "bg-violet-100" : "bg-slate-200/60"}`}>
                                                 <FiEdit3 size={18} />

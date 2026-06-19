@@ -6,6 +6,8 @@ import { FiMail, FiLock, FiArrowRight, FiEye, FiEyeOff } from "react-icons/fi";
 import { FaGoogle } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "react-toastify";
+import { authClient } from "@/lib/auth-client";
 
 export default function LoginPage() {
     const [showPassword, setShowPassword] = useState(false);
@@ -32,8 +34,23 @@ export default function LoginPage() {
 
         try {
             setLoading(true);
-            // Todo: BetterAuth sign-in setup
-            console.log("Login Successful", formData);
+
+            const { data, error } = await authClient.signIn.email({
+                email: formData.email ,
+                password: formData.password,
+                rememberMe: true,
+                callbackURL: "/",
+            });
+
+            if(data){
+                toast.success("Welcome back! You have successfully signed in.",{
+                    position:'top-center',
+                    theme:'dark'
+                })
+            }else{
+                toast.error(error.message,{position:'top-center',theme:'dark'})
+            }
+
         } catch (err) {
             setError(err.message || "Invalid email or password. Please try again.");
         } finally {
@@ -152,8 +169,8 @@ export default function LoginPage() {
                                         <label className="text-xs font-semibold uppercase tracking-wider text-slate-500 block">
                                             Password
                                         </label>
-                                        <Link 
-                                            href="#" 
+                                        <Link
+                                            href="#"
                                             className="text-xs font-semibold text-violet-600 hover:underline"
                                         >
                                             Forgot Password?
