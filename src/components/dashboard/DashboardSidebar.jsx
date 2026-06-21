@@ -1,19 +1,43 @@
 
+import { getUserSession } from "@/lib/core/session";
 import { LayoutSideContent } from "@gravity-ui/icons";
 import { Button, Drawer } from "@heroui/react";
-import { Book, Bookmark, CirclePlus, History, SquarePen} from "lucide-react";
+import { ArrowLeftRight, Book, BookCopy, Bookmark, CirclePlus, History, Home, SquarePen, UserPen, Users} from "lucide-react";
 import Link from "next/link";
 
 export default async function DashboardSidebar() {
     
+    const user = await getUserSession()
 
-    const navItems = [
+    const readerNavItems = [
+        { icon: History, href: '/dashboard/user/purchase-history', label: "Purchase History" },
+        { icon: BookCopy, href: '/dashboard/user/purchase-ebooks', label: "Purchased Ebooks" },
+        { icon: UserPen, href: '/dashboard/user/profile-management', label: "Profile Management" },
+        { icon: Bookmark, href: '/dashboard/user/bookmark-page', label: "Bookmark Page" },
+    ]
+
+    const writerNavItems = [
         { icon: Book, href: '/dashboard/writer/manage-ebooks', label: "Manage Ebooks" },
         { icon: CirclePlus, href: '/dashboard/writer/add-ebook', label: "Add Ebook" },
         { icon: SquarePen, href: '/dashboard/writer/edit-ebook', label: "Edit Ebook" },
         { icon: Bookmark, href: '/dashboard/writer/bookmark-page', label: "Bookmark Page" },
         { icon: History, href: '/dashboard/writer/sales-history', label: "Sales History" }
     ];
+
+    const adminNavItems = [
+        { icon: Home, href: '/dashboard/admin/Home', label: "Home" },
+        { icon: Users, href: '/dashboard/admin/manage-users', label: "Manage Users" },
+        { icon: Book, href: '/dashboard/admin/manage-all-ebooks', label: "Manage All Ebooks" },
+        { icon: ArrowLeftRight, href: '/dashboard/admin/transactions', label: "View All Transactions" },
+    ]
+
+    const sideBarNavItems = {
+        reader : readerNavItems,
+        writer : writerNavItems,
+        admin: adminNavItems
+    }
+
+    const navItems = sideBarNavItems[user?.role || "reader"]
 
     
 
