@@ -35,7 +35,7 @@ export default function AddEbookForm() {
   };
 
   const handleGenreSelection = (keys) => {
-    const selectedValue = Array.from(keys)[0];
+    const selectedValue = keys;
     setFormData((prev) => ({ ...prev, genre: selectedValue || "" }));
   };
 
@@ -62,14 +62,33 @@ export default function AddEbookForm() {
     setUploadingImage(true);
 
     try {
+      const imgFormData = new FormData();
+      imgFormData.append("image", imageFile);
+
       
+      const imgbbApiKey = process.env.NEXT_PUBLIC_IMAGE_UPLOAD_API ; 
+      
+      const response = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, {
+        method: "POST",
+        body: imgFormData
+      });
+
+      if (!response.ok) {
+        throw new Error("imgBB upload failed");
+      }
+
+      const imgData = await response.json();
+      const uploadedImageUrl = imgData.data.url; 
+
       setUploadingImage(false);
 
       const payload = {
         ...formData,
         price: parseFloat(formData.price) || 0,
-        coverImage: simulatedUrl
+        coverImage: uploadedImageUrl
       };
+
+      // todo: post api
 
       console.log("Fable Form Final Payload Shared to Server Axis:", payload);
       alert("Ebook uploaded successfully!");
@@ -79,6 +98,7 @@ export default function AddEbookForm() {
       setImagePreview("");
     } catch (error) {
       console.error("Error submitting form data:", error);
+      toast.error("Image upload failed. Please try again.", {position:'top-center',theme:'dark'});
     } finally {
       setSubmitting(false);
       setUploadingImage(false);
