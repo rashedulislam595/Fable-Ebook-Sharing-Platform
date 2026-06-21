@@ -19,6 +19,19 @@ export default function Navbar() {
     { name: "Browse Ebooks", href: "/browse-ebooks" },
   ];
 
+  const dashboardLinks = {
+    reader:'/dashboard/user/purchase-history',
+    writer:'/dashboard/writer/manage-ebooks',
+    admin:'/dashboard/admin'
+  }
+
+  if(user?.email){
+    navLinks.push({
+      name:"Dashboard",
+      href: dashboardLinks[user?.role || 'reader']
+    })
+  }
+
   const handleLogout = async () => {
     try {
       await authClient.signOut();

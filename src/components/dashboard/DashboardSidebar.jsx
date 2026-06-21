@@ -25,7 +25,7 @@ export default async function DashboardSidebar() {
     ];
 
     const adminNavItems = [
-        { icon: Home, href: '/dashboard/admin/Home', label: "Home" },
+        { icon: Home, href: '/dashboard/admin', label: "Home" },
         { icon: Users, href: '/dashboard/admin/manage-users', label: "Manage Users" },
         { icon: Book, href: '/dashboard/admin/manage-all-ebooks', label: "Manage All Ebooks" },
         { icon: ArrowLeftRight, href: '/dashboard/admin/transactions', label: "View All Transactions" },
