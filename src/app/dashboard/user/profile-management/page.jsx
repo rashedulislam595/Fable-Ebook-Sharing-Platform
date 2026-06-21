@@ -1,9 +1,12 @@
+import ProfileManagement from '@/components/dashboard/user/ProfileManagement';
+import { getUserSession } from '@/lib/core/session';
 import React from 'react';
 
-const ProfileManagementPage = () => {
+const ProfileManagementPage = async() => {
+    const user = await getUserSession()
     return (
         <div>
-            Profile Management page
+            <ProfileManagement user={user} />
         </div>
     );
 };
