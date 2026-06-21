@@ -3,6 +3,7 @@ import React, { useState, useRef } from "react";
 import { Input, Select, ListBox, TextArea, Button } from "@heroui/react";
 import Image from "next/image";
 import { toast } from "react-toastify";
+import { createEbook } from "@/lib/action/ebooks";
 
 const genresList = [
   { label: "Fiction", value: "fiction" },
@@ -88,10 +89,11 @@ export default function AddEbookForm() {
         coverImage: uploadedImageUrl
       };
 
-      // todo: post api
-
-      console.log("Fable Form Final Payload Shared to Server Axis:", payload);
-      alert("Ebook uploaded successfully!");
+      // post api
+      const result = await createEbook(payload)
+      if(result.insertedId){
+        toast.success('Ebook uploaded successfully!',{position:'top-center',theme:'dark'})
+      }
 
       setFormData({ title: "", genre: "", price: "", description: "" });
       setImageFile(null);
