@@ -46,7 +46,7 @@ export function EbookCard({ ebook, onCardClick }) {
               e.stopPropagation(); 
               onCardClick();
             }}
-            className="font-medium px-4 h-9 bg-[#FAF7F0] text-[#1B2430] hover:bg-[#1B2430] hover:text-[#FAF7F0] text-xs tracking-wide transition-colors"
+            className="font-medium px-4 h-9 bg-linear-to-r from-[#EF573E] to-[#FADA59] text-black duration-1000  hover:bg-linear-to-r hover:from-[#FADA59] hover:to-[#EF573E]  text-xs tracking-wide transition hover:text-white"
           >
             View Details
           </Button>

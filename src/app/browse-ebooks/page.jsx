@@ -4,6 +4,7 @@ import { Input, Select, ListBox, Card, Skeleton } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { EbookCard } from "@/components/ui/EbookCard";
 import { getAllEbooks } from "@/lib/api/ebooks";
+import EbookNotFound from "@/components/ui/EbookNotFound";
 
 const genresList = [
     { label: "All Genres", value: "all" },
@@ -144,17 +145,7 @@ export default function BrowseEbooksPage() {
                             />
                         ))}
                     </div>
-                ) : (
-                    <div
-                        className="text-center py-20 rounded-sm border"
-                        style={{ background: "#FAF7F0", borderColor: "#E3DDCB" }}
-                    >
-                        <h3 className="ebook-font-serif text-lg text-[#1B2430]">No Ebooks Found</h3>
-                        <p className="text-xs mt-1" style={{ color: "#9A9180" }}>
-                            We could not find any results matching your filter.
-                        </p>
-                    </div>
-                )}
+                ) : <EbookNotFound/>}
 
             </div>
         </div>
