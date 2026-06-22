@@ -12,7 +12,8 @@ const genresList = [
     { label: "Fiction", value: "fiction" },
     { label: "Mystery", value: "mystery" },
     { label: "Sci-Fi", value: "sci-fi" },
-    { label: "Fantasy", value: "fantasy" }
+    { label: "Fantasy", value: "fantasy" },
+    { label: "Romance", value: "romance" },
 ];
 
 export default function BrowseEbooksPage() {
@@ -71,7 +72,7 @@ export default function BrowseEbooksPage() {
 
                 {/* Controls Area */}
                 <div
-                    className="p-5 rounded-sm border flex flex-col sm:flex-row gap-4 items-center justify-between shadow-sm"
+                    className="p-5 rounded-sm border flex flex-col sm:flex-row gap-4 items-center justify-between shadow-sm "
                     style={{ background: "#FAF7F0", borderColor: "#E3DDCB" }}
                 >
                     {/* Search Input */}
@@ -82,23 +83,22 @@ export default function BrowseEbooksPage() {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             variant="bordered"
-                            className='border-[#D8D1BC] hover:border-[#B08D57]  shadow-none h-11 bg-white rounded-sm text-sm'
+                            className='border-[#D8D1BC] hover:border-[#B08D57]  shadow-none h-11 bg-gray-200 rounded-md text-sm w-full'
                         />
                     </div>
 
-                    {/* Genre Dropdown - HeroUI Official Custom Anatomy অনুযায়ী */}
-                    <div className="w-full sm:w-48">
+                    <div className="w-full sm:w-48 ">
                         <Select
                             selectedKeys={new Set([selectedGenre])}
                             onSelectionChange={(keys) => {
-                                const value = Array.from(keys)[0];
+                                const value = keys;
                                 setSelectedGenre(value || "all");
                             }}
                             className="w-full"
                         >
                             <Select.Trigger
                                 variant="bordered"
-                                className="border-[#D8D1BC] hover:border-[#B08D57] data-[hover=true]:border-[#B08D57] shadow-none h-11 bg-white rounded-sm text-sm text-[#1B2430]"
+                                className="border-[#D8D1BC] hover:border-[#B08D57] data-[hover=true]:border-[#B08D57] shadow-none h-11 bg-gray-200 rounded-sm w-full text-sm text-[#1B2430]"
                             >
                                 <Select.Value placeholder="Genre" />
                                 <Select.Indicator />
@@ -141,7 +141,6 @@ export default function BrowseEbooksPage() {
                             <EbookCard
                                 key={ebook._id?.$oid || ebook._id}
                                 ebook={ebook}
-                                onCardClick={() => handleCardNavigation(ebook._id)}
                             />
                         ))}
                     </div>

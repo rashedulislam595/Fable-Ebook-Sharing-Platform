@@ -16,7 +16,7 @@ const genresList = [
   { label: "Horror", value: "horror" }
 ];
 
-export default function AddEbookForm() {
+export default function AddEbookForm({user}) {
   const fileInputRef = useRef(null);
   const [formData, setFormData] = useState({
     title: "",
@@ -86,7 +86,10 @@ export default function AddEbookForm() {
       const payload = {
         ...formData,
         price: parseFloat(formData.price) || 0,
-        coverImage: uploadedImageUrl
+        coverImage: uploadedImageUrl,
+        writerId: user?.id,
+        writerName: user?.name,
+        writerEmail: user?.email
       };
 
       // post api

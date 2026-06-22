@@ -2,13 +2,13 @@
 import React from "react";
 import { Button, Card } from "@heroui/react";
 import Image from "next/image";
+import Link from "next/link";
 
-export function EbookCard({ ebook, onCardClick }) {
+export function EbookCard({ ebook }) {
   const { title, genre, price, coverImage, isSold } = ebook;
 
   return (
     <Card
-      onClick={onCardClick}
       className="group relative rounded-sm overflow-hidden border transition-all duration-300 hover:-translate-y-1"
       style={{
         background: "#FAF7F0",
@@ -36,21 +36,6 @@ export function EbookCard({ ebook, onCardClick }) {
             Sold
           </div>
         )}
-
-        {/* Hover Overlay with View Details Button */}
-        <div className="absolute inset-0 bg-[#1B2430]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4 z-10">
-          <Button
-            size="sm"
-            radius="sm"
-            onClick={(e) => {
-              e.stopPropagation(); 
-              onCardClick();
-            }}
-            className="font-medium px-4 h-9 bg-linear-to-r from-[#EF573E] to-[#FADA59] text-black duration-1000  hover:bg-linear-to-r hover:from-[#FADA59] hover:to-[#EF573E]  text-xs tracking-wide transition hover:text-white"
-          >
-            View Details
-          </Button>
-        </div>
       </div>
 
       {/* Ebook Info */}
@@ -75,6 +60,18 @@ export function EbookCard({ ebook, onCardClick }) {
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
             </svg>
           </span>
+        </div>
+        {/* view details */}
+        <div className="mt-4">
+          <Link href={`browse-ebooks/${ebook._id}`}>
+          <Button
+            size="sm"
+            radius="sm"
+            className="font-medium px-4 h-9 bg-linear-to-r from-[#EF573E] to-[#FADA59] text-black duration-1000  hover:bg-linear-to-r hover:from-[#FADA59] hover:to-[#EF573E]  text-xs tracking-wide transition hover:text-white w-full rounded-lg"
+          >
+            View Details
+          </Button>
+          </Link>
         </div>
       </div>
     </Card>
