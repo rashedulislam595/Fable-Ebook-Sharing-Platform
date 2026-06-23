@@ -53,7 +53,7 @@ export async function POST(req) {
             metadata: {
                 ebookId: ebook._id.toString(),
                 writerId: ebook.writerId?.toString() || "",
-                buyerId: buyerId || "",
+                buyerId: user?.id,
             },
 
             success_url: `${process.env.BETTER_AUTH_URL}/success?session_id={CHECKOUT_SESSION_ID}`,

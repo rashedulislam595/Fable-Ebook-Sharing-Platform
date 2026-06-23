@@ -2,6 +2,8 @@ import { stripe } from '@/lib/stripe'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { CircleCheck } from "@gravity-ui/icons"
+import { getEbookById } from '@/lib/api/ebooks'
+import { createPurchases } from '@/lib/action/purchases'
 
 export default async function Success({ searchParams }) {
   const { session_id } = await searchParams
@@ -13,17 +15,34 @@ export default async function Success({ searchParams }) {
     expand: ['line_items', 'payment_intent']
   })
 
+  // console.log("session response:", session.metadata)
+
   const { status, customer_details, amount_total, id } = session
   const customerEmail = customer_details?.email
 
   if (status === 'open') {
     return redirect('/')
   }
+  const ebook = await getEbookById(session.metadata.ebookId)
+
+  const purchaseData = {
+    ebookId: session.metadata.ebookId,
+    tittle: ebook.tittle,
+    description: ebook.description,
+    coverImage: ebook.coverImage,
+    writerId: session.metadata.writerId,
+    buyerId: session.metadata.readerId,
+    buyerEmail: customerEmail,
+    transactionId: id,
+    amount: amount_total / 100,
+  };
+  // console.log(purchaseData)
+  const result = await createPurchases(purchaseData)
 
   if (status === 'complete') {
     return (
       <main className="w-full min-h-[85vh] flex items-center justify-center p-4 bg-[#FAF7F0] font-sans">
-        <div 
+        <div
           className="w-full max-w-md bg-white border rounded-xl p-8 text-center transition-all"
           style={{
             borderColor: "#E3DDCB",
@@ -44,7 +63,7 @@ export default async function Success({ searchParams }) {
           <h1 className="text-3xl font-serif font-bold text-[#1B2430] mt-1.5 tracking-tight">
             Thank you, Reader!
           </h1>
-          
+
           <p className="text-sm text-zinc-500 font-serif mt-3 max-w-sm mx-auto leading-relaxed">
             We appreciate your business! A confirmation and access link has been dispatched to{' '}
             <span className="text-[#1B2430] font-semibold font-sans break-all">{customerEmail}</span>.
@@ -69,8 +88,8 @@ export default async function Success({ searchParams }) {
           {/* Help & Support Footer */}
           <p className="text-[11px] text-zinc-400 mt-6">
             Have questions? Contact support at{' '}
-            <a 
-              href="mailto:orders@example.com" 
+            <a
+              href="mailto:orders@example.com"
               className="text-[#B08D57] hover:underline font-medium transition-all"
             >
               orders@example.com
