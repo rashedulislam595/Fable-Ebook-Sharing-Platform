@@ -11,23 +11,41 @@ export default function EbookDetails({ ebook }) {
 
   // ডেটা ফরম্যাটিং (যদি createdAt অবজেক্ট আকারে থাকে)
   const rawDate = ebook.createdAt?.$date || ebook.createdAt;
-  const formattedDate = rawDate 
+  const formattedDate = rawDate
     ? new Date(rawDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
     : 'N/A';
+
+  const handlePurchase = async () => {
+    const response = await fetch("/api/checkout_sessions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ebookId: ebook._id,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (data.url) {
+      window.location.href = data.url;
+    }
+  };
 
   return (
     <div className="w-full min-h-screen py-16 px-4 sm:px-6 lg:px-8 bg-[#FAF7F0]/30 antialiased">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-16 items-start">
-        
+
         {/* LEFT COLUMN: Book Cover Image with Polarized Tilt Frame */}
         <div className="md:col-span-5 flex justify-center md:justify-start">
           <div className="bg-white p-4 shadow-[0_10px_30px_rgba(0,0,0,0.06)] border border-[#E3DDCB] transform -rotate-1 hover:rotate-0 transition-transform duration-300 max-w-sm w-full">
             <div className="w-full relative h-[500] bg-[#FAF7F0] overflow-hidden">
-              <Image 
-                src={ebook.coverImage} 
+              <Image
+                src={ebook.coverImage}
                 alt={ebook.title}
                 width={200}
-                height={200} 
+                height={200}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -36,16 +54,16 @@ export default function EbookDetails({ ebook }) {
 
         {/* RIGHT COLUMN: Ebook Metadata & Purchase Info */}
         <div className="md:col-span-7 space-y-6 pt-2">
-          
+
           {/* Tags / Badges */}
           <div className="flex flex-wrap items-center gap-3">
-            <Chip 
-              variant="flat" 
+            <Chip
+              variant="flat"
               className="bg-[#E3DDCB]/40 text-[#9A9180] font-medium tracking-wider text-[10px] uppercase rounded-sm px-2 h-6"
             >
               {ebook.genre || "Uncategorized"}
             </Chip>
-            
+
             <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#EAF5EA] text-[#2E7D32]">
               <span className="w-1.5 h-1.5 rounded-full bg-[#2E7D32]" />
               <p className="text-[10px] uppercase font-bold tracking-wider">Available</p>
@@ -94,22 +112,23 @@ export default function EbookDetails({ ebook }) {
 
               <div className='flex gap-5 items-center'>
                 {/* Purchase Button */}
-              <Button
-                className="rounded-md bg-linear-to-r from-[#EF573E] to-[#FADA59] text-black duration-1000 transition hover:bg-linear-to-r hover:from-[#FADA59] hover:to-[#EF573E] hover:text-white px-7 h-12 text-sm font-medium flex items-center gap-2"
-                radius="none"
-              >
-                Purchase Ebook
-                <FiArrowRight size={15} />
-              </Button>
+                <Button
+                onClick={handlePurchase}
+                  className="rounded-md bg-linear-to-r from-[#EF573E] to-[#FADA59] text-black duration-1000 transition hover:bg-linear-to-r hover:from-[#FADA59] hover:to-[#EF573E] hover:text-white px-7 h-12 text-sm font-medium flex items-center gap-2"
+                  radius="none"
+                >
+                  Purchase Ebook
+                  <FiArrowRight size={15} />
+                </Button>
 
-              {/* Bookmark / Wishlist Button */}
-              <Button
-                variant="bordered"
-                className="text-sm bg-slate-900 text-white font-medium hover:bg-slate-800 transition-all  rounded-md h-12 px-7"
-                radius="none"
-              >
-                <FiBookmark size={18} /> BookMark
-              </Button>
+                {/* Bookmark / Wishlist Button */}
+                <Button
+                  variant="bordered"
+                  className="text-sm bg-slate-900 text-white font-medium hover:bg-slate-800 transition-all  rounded-md h-12 px-7"
+                  radius="none"
+                >
+                  <FiBookmark size={18} /> BookMark
+                </Button>
               </div>
             </div>
 
