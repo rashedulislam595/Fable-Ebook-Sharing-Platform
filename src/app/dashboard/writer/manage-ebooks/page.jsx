@@ -1,3 +1,4 @@
+import { EbooksHeaderStats } from '@/components/dashboard/writer/EbooksHeaderStats';
 import { EbooksTableList } from '@/components/dashboard/writer/EbooksTableList';
 import { getEbooksByWriterId } from '@/lib/api/ebooks';
 import { getUserSession } from '@/lib/core/session';
@@ -8,7 +9,7 @@ const ManageEbooksPage =async () => {
     const ebooks = await getEbooksByWriterId(user?.id)
     return (
         <div>
-            Manage Ebooks page is coming soon
+            <EbooksHeaderStats total={ebooks.length} />
             <EbooksTableList initialEbooks={ebooks}/>
         </div>
     );

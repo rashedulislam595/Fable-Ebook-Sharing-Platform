@@ -41,7 +41,7 @@ export function EbooksTableList({ initialEbooks }) {
   };
 
   return (
-    <div className="w-full bg-white border border-zinc-200 shadow-sm rounded-xl overflow-hidden p-2 sm:p-4">
+    <div className="w-full bg-white border border-zinc-200 shadow-sm rounded-xl overflow-hidden p-2 sm:p-4 ">
       
       {/* 1. Mobile & Tablet View (Card List for Light Theme) */}
       <div className="block lg:hidden space-y-3">
