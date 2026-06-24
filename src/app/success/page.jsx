@@ -27,11 +27,13 @@ export default async function Success({ searchParams }) {
 
   const purchaseData = {
     ebookId: session.metadata.ebookId,
-    tittle: ebook.tittle,
+    title: ebook.title,
     description: ebook.description,
     coverImage: ebook.coverImage,
     writerId: session.metadata.writerId,
-    buyerId: session.metadata.readerId,
+    writerName: ebook.writerName,
+    writerEmail:ebook.writerEmail,
+    buyerId: session.metadata.buyerId,
     buyerEmail: customerEmail,
     transactionId: id,
     amount: amount_total / 100,
