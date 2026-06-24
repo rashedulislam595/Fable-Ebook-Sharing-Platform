@@ -10,7 +10,7 @@ const PurchasedEbooksPage = async () => {
     return (
         <div className="w-full min-h-screen p-4 md:p-6 lg:p-8 font-sans bg-[#FAF8F5]">
             
-            <div className="mb-8 border-b border-dashed pb-5" style={{ borderColor: "#E3DDCB" }}>
+            <div className="mb-8 border-b border-dashed pb-5 text-center" style={{ borderColor: "#E3DDCB" }}>
                 <h1 className="ebook-font-serif text-2xl md:text-3xl font-bold tracking-tight" style={{ color: "#1B2430" }}>
                     Purchased Ebooks
                 </h1>

@@ -7,7 +7,8 @@ import Link from "next/link";
 
 export function PurchasedEbookCard({ ebook }) {
   
-  const { title, coverImage, writerName, ebookId } = ebook;
+  const { title, coverImage, writerName, _id } = ebook;
+  console.log(ebook)
 
   return (
     <Card
@@ -63,7 +64,7 @@ export function PurchasedEbookCard({ ebook }) {
 
         {/* View Details Link */}
         <div className="mt-4">
-          <Link href={`/browse-ebooks/${ebookId}`}>
+          <Link href={`/dashboard/user/purchased-ebooks/${_id}`}>
             <Button
               size="sm"
               radius="sm"

@@ -32,6 +32,7 @@ export default async function Success({ searchParams }) {
     coverImage: ebook.coverImage,
     writerId: session.metadata.writerId,
     writerName: ebook.writerName,
+    genre:ebook.genre,
     writerEmail:ebook.writerEmail,
     buyerId: session.metadata.buyerId,
     buyerEmail: customerEmail,

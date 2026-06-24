@@ -5,6 +5,7 @@ import { Table, Chip, Button, Dropdown, DropdownTrigger, DropdownMenu, DropdownI
 import { EllipsisVertical, ArrowDownToLine, FileText } from "@gravity-ui/icons";
 import Image from 'next/image';
 import NoPurchaseHistory from './NoPurchaseHistory';
+import Link from 'next/link';
 
 export function PurchaseHistoryTable({ purchaseData }) {
     // Array format
@@ -207,7 +208,8 @@ export function PurchaseHistoryTable({ purchaseData }) {
                                             </Table.Cell>
 
                                             <Table.Cell>
-                                                <Button
+                                                <Link href={`/dashboard/user/purchased-ebooks/${item._id}`} >
+                                                    <Button
                                                     size="sm"
                                                     variant="light"
                                                     
@@ -216,6 +218,8 @@ export function PurchaseHistoryTable({ purchaseData }) {
                                                 >
                                                     view Details
                                                 </Button>
+                                                </Link>
+                                                
                                             </Table.Cell>
 
                                         </Table.Row>
