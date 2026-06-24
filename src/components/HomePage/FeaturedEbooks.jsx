@@ -27,15 +27,17 @@ const FeaturedEbooks = async () => {
                         </p>
                     </div>
 
-                    <Link href="/browse-ebooks" className=''>
-                        <div
-                            className="mt-4 sm:mt-0 font-mono text-xs px-3.5 py-1.5 text-blue-500 flex items-center gap-1.5 transition-all duration-300  cursor-pointer hover:font-bold hover:text-blue-700 group justify-end"
-                            
-                        >
-                            <span>View All</span>
-                            <FiArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
-                        </div>
-                    </Link>
+                    <div className='flex justify-end'>
+                        <Link href="/browse-ebooks">
+                            <div
+                                className="mt-4 sm:mt-0 font-mono text-xs px-3.5 py-1.5 text-blue-500 flex items-center gap-1.5 transition-all duration-300  cursor-pointer hover:font-bold hover:text-blue-700 group "
+
+                            >
+                                <span>View All</span>
+                                <FiArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
+                            </div>
+                        </Link>
+                    </div>
                 </div>
 
                 {ebooks.length === 0 ? (
