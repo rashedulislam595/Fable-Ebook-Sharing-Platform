@@ -11,7 +11,7 @@ export default async function DashboardSidebar() {
 
     const readerNavItems = [
         { icon: History, href: '/dashboard/user/purchase-history', label: "Purchase History" },
-        { icon: BookCopy, href: '/dashboard/user/purchase-ebooks', label: "Purchased Ebooks" },
+        { icon: BookCopy, href: '/dashboard/user/purchased-ebooks', label: "Purchased Ebooks" },
         { icon: UserPen, href: '/dashboard/user/profile-management', label: "Profile Management" },
         { icon: Bookmark, href: '/dashboard/user/bookmark-page', label: "Bookmark Page" },
     ]
