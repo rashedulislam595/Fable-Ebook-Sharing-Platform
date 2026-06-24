@@ -4,12 +4,13 @@ import React from 'react';
 import { Button, Chip } from "@heroui/react";
 import { FiArrowRight, FiBookmark, FiLock } from "react-icons/fi";
 import Image from 'next/image';
+import { toast } from 'react-toastify';
+import { createBookmark } from '@/lib/action/bookmark';
 
-export default function EbookDetails({ ebook }) {
-  // ডেটা স্ট্রাকচার সেফটি হ্যান্ডেলিং
+export default function EbookDetails({ ebook,user }) {
+  
   if (!ebook) return null;
 
-  // ডেটা ফরম্যাটিং (যদি createdAt অবজেক্ট আকারে থাকে)
   const rawDate = ebook.createdAt?.$date || ebook.createdAt;
   const formattedDate = rawDate
     ? new Date(rawDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
@@ -32,6 +33,25 @@ export default function EbookDetails({ ebook }) {
       window.location.href = data.url;
     }
   };
+
+  const handleBookmark = async()=>{
+    
+    const bookmarkData = {
+      userId:user?.id,
+      userEmail: user?.email,
+      ebookId: ebook._id,
+      title: ebook.title,
+      coverImage:ebook.coverImage,
+      writerId: ebook.writerId,
+      writerEmail:ebook.writerEmail,
+      writerName:ebook.writerName,
+    }
+
+    const result = await createBookmark(bookmarkData);
+    if(result.insertedId){
+      toast.success(`Bookmark Successful by ${ebook.title}`,{position:'top-center',theme:'dark'})
+    }
+  }
 
   return (
     <div className="w-full min-h-screen py-16 px-4 sm:px-6 lg:px-8 bg-[#FAF7F0]/30 antialiased">
@@ -123,6 +143,7 @@ export default function EbookDetails({ ebook }) {
 
                 {/* Bookmark / Wishlist Button */}
                 <Button
+                onClick={handleBookmark}
                   variant="bordered"
                   className="text-sm bg-slate-900 text-white font-medium hover:bg-slate-800 transition-all  rounded-md h-12 px-7"
                   radius="none"
