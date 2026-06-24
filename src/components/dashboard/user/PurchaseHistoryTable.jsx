@@ -21,7 +21,7 @@ export function PurchaseHistoryTable({ purchaseData }) {
             day: 'numeric'
         });
     };
-    console.log(historyList)
+    // console.log(historyList)
 
     if (historyList.length === 0) {
         return <NoPurchaseHistory />;

@@ -8,7 +8,7 @@ import Link from "next/link";
 export function PurchasedEbookCard({ ebook }) {
   
   const { title, coverImage, writerName, _id } = ebook;
-  console.log(ebook)
+  // console.log(ebook)
 
   return (
     <Card

@@ -50,6 +50,8 @@ export default function EbookDetails({ ebook,user }) {
     const result = await createBookmark(bookmarkData);
     if(result.insertedId){
       toast.success(`Bookmark Successful by ${ebook.title}`,{position:'top-center',theme:'dark'})
+    }else{
+      toast.warning('This ebook has already been added to your bookmarks.',{position:'top-center',theme:'dark'})
     }
   }
 
