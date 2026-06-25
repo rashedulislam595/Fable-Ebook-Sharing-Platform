@@ -5,6 +5,7 @@ import { Table, Chip, Button } from "@heroui/react";
 import { Pencil, TrashBin, Globe, EyeSlash} from "@gravity-ui/icons";
 import Image from 'next/image';
 import DeleteManageEbooksModal from '../admin/DeleteManageEbooksModal';
+import EditEbookModal from './EditEbookModal';
 
 export function EbooksTableList({ initialEbooks }) {
   const [ebooks, setEbooks] = useState(initialEbooks);
@@ -207,15 +208,7 @@ export function EbooksTableList({ initialEbooks }) {
                             {ebookStatus === "published" ? <EyeSlash width={15} height={15} /> : <Globe width={15} height={15} />}
                           </Button>
 
-                          <Button
-                            isIconOnly
-                            size="sm"
-                            variant="light"
-                            className="text-zinc-500 hover:text-amber-600 hover:bg-zinc-100 min-w-8 w-8 h-8 rounded-md transition-colors"
-                            title="Edit Ebook"
-                          >
-                            <Pencil width={14} height={14} />
-                          </Button>
+                          <EditEbookModal ebook={ebook} />
 
                           <DeleteManageEbooksModal ebook={ebook} />
                         </div>
