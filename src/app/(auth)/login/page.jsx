@@ -8,11 +8,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import { authClient } from "@/lib/auth-client";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function LoginPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+
+    const router = useRouter()
+    const searchParams = useSearchParams()
+    const redirectTo = searchParams.get("redirect") || '/'
 
     const [formData, setFormData] = useState({
         email: "",
@@ -39,7 +44,7 @@ export default function LoginPage() {
                 email: formData.email,
                 password: formData.password,
                 rememberMe: true,
-                callbackURL: "/",
+                
             });
 
             if (data) {
@@ -47,6 +52,7 @@ export default function LoginPage() {
                     position: 'top-center',
                     theme: 'dark'
                 })
+                router.push(redirectTo)
             } else {
                 toast.error(error.message, { position: 'top-center', theme: 'dark' })
             }
@@ -260,7 +266,7 @@ export default function LoginPage() {
                                 <p className="text-center text-sm text-slate-500 pt-2">
                                     Do not have an account yet?{" "}
                                     <Link
-                                        href={`/register`}
+                                        href={`/register?redirect=${redirectTo}`}
                                         className="text-violet-600 hover:text-violet-700 font-semibold transition-colors"
                                     >
                                         Register

@@ -8,10 +8,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function RegisterPage() {
     const router = useRouter()
+    const searchParams = useSearchParams()
+    const redirectTo = searchParams.get('redirect') || '/'
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -61,7 +63,7 @@ export default function RegisterPage() {
 
             if(data){
                 toast.success("Account created successfully!",{position:'top-center', theme:'dark'})
-                router.push('/login')
+                router.push(redirectTo)
             }else{
                 toast.error(error.message,{position:'top-center', theme:'dark'})
             }
