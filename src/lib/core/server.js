@@ -18,3 +18,12 @@ export const serverMutation = async(api,newJobData,method = 'POST')=>{
     const data = await res.json();
     return data;
 }
+
+// export const serverDelete = async(api)=>{
+//     const res = await fetch(`${baseUrl}${api}`,{
+//         method: "DELETE",
+//         headers:{
+            
+//         }
+//     })
+// }

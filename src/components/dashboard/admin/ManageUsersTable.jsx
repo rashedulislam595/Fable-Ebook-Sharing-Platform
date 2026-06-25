@@ -3,6 +3,7 @@
 import { Table, Chip, Button, Tooltip } from "@heroui/react";
 import { FiUserCheck, FiTrash2 } from "react-icons/fi";
 import ChangeUserRoleModal from "./ChangeUserRoleModal";
+import DeleteUserModal from "./DeleteUserModal";
 
 export default function ManageUsersTable({ users = [] }) {
   
@@ -106,7 +107,7 @@ export default function ManageUsersTable({ users = [] }) {
                           </Tooltip>
 
                           <Tooltip content="Delete User">
-                            <Button
+                            {/* <Button
                               isIconOnly
                               size="sm"
                               variant="light"
@@ -117,7 +118,8 @@ export default function ManageUsersTable({ users = [] }) {
                               }
                             >
                               <FiTrash2 size={16} />
-                            </Button>
+                            </Button> */}
+                            <DeleteUserModal user={user} />
                           </Tooltip>
                         </div>
                       </Table.Cell>
