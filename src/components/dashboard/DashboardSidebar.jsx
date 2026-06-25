@@ -19,7 +19,6 @@ export default async function DashboardSidebar() {
     const writerNavItems = [
         { icon: Book, href: '/dashboard/writer/manage-ebooks', label: "Manage Ebooks" },
         { icon: CirclePlus, href: '/dashboard/writer/add-ebook', label: "Add Ebook" },
-        { icon: SquarePen, href: '/dashboard/writer/edit-ebook', label: "Edit Ebook" },
         { icon: Bookmark, href: '/dashboard/writer/bookmark-page', label: "Bookmark Page" },
         { icon: History, href: '/dashboard/writer/sales-history', label: "Sales History" }
     ];

@@ -7,7 +7,6 @@ import { toast } from 'react-toastify';
 import { DeleteEbooksById } from '@/lib/action/ebooks';
 
 
-
 export default function DeleteManageEbooksModal({ ebook }) {
     const handleDelete = async () => {
         const result = await DeleteEbooksById(ebook._id)
