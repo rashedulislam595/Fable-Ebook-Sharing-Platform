@@ -2,6 +2,7 @@
 
 import { Table, Chip, Button, Tooltip } from "@heroui/react";
 import { FiUserCheck, FiTrash2 } from "react-icons/fi";
+import ChangeUserRoleModal from "./ChangeUserRoleModal";
 
 export default function ManageUsersTable({ users = [] }) {
   
@@ -101,20 +102,7 @@ export default function ManageUsersTable({ users = [] }) {
                       <Table.Cell>
                         <div className="flex items-center gap-2">
                           <Tooltip content="Change Role">
-                            <Button
-                              isIconOnly
-                              size="sm"
-                              variant="light"
-                              className='opacity-60 hover:opacity-100'
-                              onPress={() =>
-                                handleRoleUpdate(
-                                  user._id,
-                                  user.role
-                                )
-                              }
-                            >
-                              <FiUserCheck size={16} />
-                            </Button>
+                            <ChangeUserRoleModal user={user} />
                           </Tooltip>
 
                           <Tooltip content="Delete User">
