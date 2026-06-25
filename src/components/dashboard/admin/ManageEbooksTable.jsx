@@ -7,6 +7,7 @@ import { EyeSlash } from "@gravity-ui/icons";
 import { Globe } from "lucide-react";
 import { updateStatus } from "@/lib/action/ebooks";
 import { toast } from "react-toastify";
+import DeleteManageEbooksModal from "./DeleteManageEbooksModal";
 
 export default function ManageEbooksTable({ ebooks = [] }) {
 
@@ -133,14 +134,7 @@ export default function ManageEbooksTable({ ebooks = [] }) {
                                                     </Tooltip>
 
                                                     <Tooltip content="Delete Ebook">
-                                                        <Button
-                                                            isIconOnly
-                                                            size="sm"
-                                                            variant="light"
-                                                            className="text-zinc-600 hover:text-red-600 rounded-lg min-w-8 h-8"
-                                                        >
-                                                            <FiTrash2 size={16} />
-                                                        </Button>
+                                                        <DeleteManageEbooksModal ebook={ebook} />
                                                     </Tooltip>
 
                                                 </div>

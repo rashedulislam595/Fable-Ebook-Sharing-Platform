@@ -9,3 +9,7 @@ export const createEbook = async(newEbook)=>{
 export const updateStatus = async(id,status)=>{
     return serverMutation(`/api/ebooks/${id}`,status,"PATCH")
 }
+
+export const DeleteEbooksById = async(id)=>{
+    return serverMutation(`/api/ebooks/${id}`,{},"DELETE")
+}
