@@ -6,20 +6,6 @@ import ChangeUserRoleModal from "./ChangeUserRoleModal";
 import DeleteUserModal from "./DeleteUserModal";
 
 export default function ManageUsersTable({ users = [] }) {
-  
-  const handleRoleUpdate = async (userId, currentRole) => {
-    console.log("Update User:", userId, currentRole);
-
-    // API Ready
-    // await updateUserRole(userId, newRole)
-  };
-
-  const handleDeleteUser = async (userId) => {
-    console.log("Delete User:", userId);
-
-    // API Ready
-    // await deleteUser(userId)
-  };
 
   const renderRoleChip = (role) => {
     const styles = {

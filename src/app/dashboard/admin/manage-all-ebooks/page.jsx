@@ -1,9 +1,12 @@
+import ManageEbooksTable from '@/components/dashboard/admin/ManageEbooksTable';
+import { getAllEbooksByAdmin } from '@/lib/api/ebooks';
 import React from 'react';
 
-const ManageAllEbooksPage = () => {
+const ManageAllEbooksPage = async () => {
+    const ebooks = await getAllEbooksByAdmin()
     return (
         <div>
-            Manage All Ebooks Page
+            <ManageEbooksTable ebooks={ebooks} />
         </div>
     );
 };
