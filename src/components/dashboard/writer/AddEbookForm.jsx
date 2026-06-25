@@ -85,6 +85,7 @@ export default function AddEbookForm({user}) {
 
       const payload = {
         ...formData,
+        status: "unpublished",
         price: parseFloat(formData.price) || 0,
         coverImage: uploadedImageUrl,
         writerId: user?.id,

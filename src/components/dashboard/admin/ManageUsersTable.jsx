@@ -40,9 +40,9 @@ export default function ManageUsersTable({ users = [] }) {
   };
 
   return (
-    <div className="w-full">
-      <div className="mb-6 text-center mt-10">
-        <h2 className="text-2xl font-bold">Manage Users</h2>
+    <div className="w-full p-4">
+      <div className="mb-6 text-center mt-6">
+        <h2 className="text-4xl font-bold">Manage Users</h2>
         <p className="text-sm text-zinc-500">
           Manage platform users and writers.
         </p>
