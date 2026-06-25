@@ -37,6 +37,7 @@ export default async function Success({ searchParams }) {
     buyerId: session.metadata.buyerId,
     buyerEmail: customerEmail,
     transactionId: id,
+    type:"purchase",
     amount: amount_total / 100,
   };
   // console.log(purchaseData)
