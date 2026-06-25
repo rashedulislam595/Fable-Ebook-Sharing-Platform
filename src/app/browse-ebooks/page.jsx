@@ -27,7 +27,7 @@ export default function BrowseEbooksPage() {
         const fetchAllEbooks = async () => {
             try {
                 setLoading(true);
-                const result = await getAllEbooks();
+                const result = await getAllEbooks("published");
                 setEbooksData(result || []);
             } catch (error) {
                 console.error("Error fetching ebooks:", error);
@@ -39,7 +39,7 @@ export default function BrowseEbooksPage() {
         fetchAllEbooks();
     }, []);
 
-    // সার্চ এবং জেনার ফিল্টারিং লজিক (নিখুঁত ম্যাচিং)
+    // search logic
     const filteredEbooks = ebooksData.filter((ebook) => {
         const titleMatch = ebook.title?.toLowerCase().includes(searchQuery.toLowerCase());
         const descMatch = ebook.description?.toLowerCase().includes(searchQuery.toLowerCase());
@@ -50,11 +50,6 @@ export default function BrowseEbooksPage() {
 
         return matchesSearch && matchesGenre;
     });
-
-    const handleCardNavigation = (id) => {
-        const ebookId = id?.$oid || id;
-        router.push(`/ebooks/${ebookId}`);
-    };
 
     return (
         <div className="w-full min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-[#FAF7F0]/30">

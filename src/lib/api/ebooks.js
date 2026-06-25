@@ -1,7 +1,7 @@
 import { serverFetch } from "../core/server"
 
-export const getAllEbooks = async ()=>{
-    return serverFetch('/api/ebooks')
+export const getAllEbooks = async (status)=>{
+    return serverFetch(`/api/ebooks?status=${status}`)
 }
 
 export const getEbooksByWriterId = async(writerId)=>{

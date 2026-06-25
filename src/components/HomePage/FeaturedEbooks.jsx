@@ -5,7 +5,7 @@ import { EbookCard } from '../ui/EbookCard';
 import Link from 'next/link';
 
 const FeaturedEbooks = async () => {
-    const allEbooks = await getAllEbooks() || [];
+    const allEbooks = await getAllEbooks("published") || [];
 
     const ebooks = allEbooks.slice(0, 6);
 
