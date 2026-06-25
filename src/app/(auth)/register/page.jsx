@@ -99,8 +99,8 @@ export default function RegisterPage() {
                 <div className="hidden lg:flex flex-col justify-between p-14 bg-linear-to-br from-slate-50 to-violet-50/30 border-r border-slate-100 group">
                     <div>
                         <div className="flex items-center gap-2 mb-6">
-                            <div className="w-3 h-3 rounded-full bg-violet-600 animate-pulse" />
-                            <h2 className="text-xl font-bold tracking-tight text-violet-600 font-serif">
+                            <div className="w-3 h-3 rounded-full bg-linear-to-r from-[#EF573E] to-[#FADA59] animate-pulse" />
+                            <h2 className="text-xl font-bold tracking-tight bg-linear-to-r from-[#EF573E] to-[#FADA59] bg-clip-text text-transparent font-serif ">
                                 Fable
                             </h2>
                         </div>

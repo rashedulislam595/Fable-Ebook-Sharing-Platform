@@ -68,7 +68,7 @@ export default function Navbar() {
               className="w-full h-full"
             />
           </Link>
-          <h2 className="bg-linear-to-r from-[#EF573E] to-[#FADA59] bg-clip-text text-3xl font-extrabold tracking-tight text-transparent" >Fable</h2>
+          <h2 className="bg-linear-to-r from-[#EF573E] to-[#FADA59] bg-clip-text text-3xl font-extrabold tracking-tight text-transparent " >Fable</h2>
         </div>
 
         {/* DESKTOP MENU */}

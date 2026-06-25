@@ -24,7 +24,7 @@ export default function Footer() {
                                     className="w-full h-full"
                                   />
                                 </Link>
-                                <h2 className="bg-linear-to-r from-[#EF573E] to-[#FADA59] bg-clip-text text-3xl font-extrabold tracking-tight text-transparent" >Fable</h2>
+                                <h2 className="bg-linear-to-r from-[#EF573E] to-[#FADA59] bg-clip-text text-3xl font-extrabold tracking-tight text-transparent animate-pulse" >Fable</h2>
                                 </div>
                         <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
                             The focused atmosphere for modern readers. Crafting the future of independent publishing.

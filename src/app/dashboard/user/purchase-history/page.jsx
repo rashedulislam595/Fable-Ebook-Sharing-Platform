@@ -5,7 +5,7 @@ import React from 'react';
 
 const PurchaseHistoryPage = async () => {
     const user = await getUserSession();
-    const purchaseData = await getPurchasesByBuyerId(user.id)
+    const purchaseData = await getPurchasesByBuyerId(user?.id)
     // console.log("purchasesData",purchaseData)
     return (
         <div className='space-y-6'>
