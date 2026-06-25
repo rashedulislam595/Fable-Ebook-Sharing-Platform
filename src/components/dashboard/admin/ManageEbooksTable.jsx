@@ -5,6 +5,8 @@ import { FiTrash2, FiUserCheck } from "react-icons/fi";
 import Image from "next/image";
 import { EyeSlash } from "@gravity-ui/icons";
 import { Globe } from "lucide-react";
+import { updateStatus } from "@/lib/action/ebooks";
+import { toast } from "react-toastify";
 
 export default function ManageEbooksTable({ ebooks = [] }) {
 
@@ -25,10 +27,16 @@ export default function ManageEbooksTable({ ebooks = [] }) {
         );
     };
 
-    const handleTogglePublish = (id, status) => {
-        console.log(id, status)
+    const handleTogglePublish = async (id, status) => {
         const toggleStatus = status === "published" ? "unpublished" : "published"
-        console.log(toggleStatus)
+
+        const result = await updateStatus(id, { status: toggleStatus })
+        if (result.modifiedCount > 0) {
+            toast.success(status === "published"
+                ? "The ebook has been removed from public visibility."
+                : "The ebook is now live and available to readers.");
+            window.location.reload();
+        }
     }
 
     return (

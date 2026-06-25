@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Modal, Button, RadioGroup, Radio } from '@heroui/react';
+import { Modal, Button } from '@heroui/react';
 import { FiUserCheck } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import { updateUserRole } from '@/lib/action/users';
@@ -18,10 +18,7 @@ export default function ChangeUserRoleModal({ user }) {
     if (result.modifiedCount > 0) {
         toast.success("User role updated successfully");
         window.location.reload();
-    }else{
-        toast.error('error')
     }
-    // console.log(user._id,selectedRole)
     };
 
 
