@@ -4,6 +4,8 @@ import React, { useRef, useState } from 'react';
 import Image from 'next/image';
 import { Modal, Button, Input, Select, ListBox, TextArea } from '@heroui/react';
 import { Pencil } from 'lucide-react';
+import { updateStatus } from '@/lib/action/ebooks';
+import { toast } from 'react-toastify';
 
 const genresList = [
     { label: "Fiction", value: "fiction" },
@@ -67,19 +69,62 @@ export default function EditEbookModal({ ebook }) {
         try {
             setLoading(true);
 
+            let coverImage = ebook.coverImage;
+
+            // only upload if new image selected
+            if (imageFile) {
+                const imgFormData = new FormData();
+                imgFormData.append("image", imageFile);
+
+                const imgbbApiKey = process.env.NEXT_PUBLIC_IMAGE_UPLOAD_API;
+
+                const response = await fetch(
+                    `https://api.imgbb.com/1/upload?key=${imgbbApiKey}`,
+                    {
+                        method: "POST",
+                        body: imgFormData,
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error("imgBB upload failed");
+                }
+
+                const imgData = await response.json();
+
+                coverImage = imgData.data.url;
+            }
+
             const updateData = {
                 ...formData,
-                imageFile,
+                price: parseFloat(formData.price) || 0,
+                coverImage,
             };
 
-            console.log(updateData);
+            const result = await updateStatus(ebook._id,updateData)
 
-            // =========================
-            // API CALL HERE
-            // =========================
+            if (result.modifiedCount > 0) {
+                toast.success(
+                    "Ebook updated successfully.",
+                    {
+                        position: "top-center",
+                        theme: "dark",
+                    }
+                );
+
+                window.location.reload()
+            }
 
         } catch (error) {
             console.error(error);
+
+            toast.error(
+                "Failed to update ebook.",
+                {
+                    position: "top-center",
+                    theme: "dark",
+                }
+            );
         } finally {
             setLoading(false);
         }
@@ -187,6 +232,7 @@ export default function EditEbookModal({ ebook }) {
                                                             ? new Set([formData.genre])
                                                             : new Set()
                                                     }
+                                                    defaultValue={ebook.genre}
                                                     onSelectionChange={handleGenreSelection}
                                                 >
                                                     <Select.Trigger>
@@ -241,7 +287,7 @@ export default function EditEbookModal({ ebook }) {
                                         onChange={handleInputChange}
                                         variant="bordered"
                                         placeholder="Update ebook description..."
-                                        
+
                                     />
                                 </div>
 
