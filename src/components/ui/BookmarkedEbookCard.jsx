@@ -5,17 +5,14 @@ import { Card, Button } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { FiTrash2, FiEye } from "react-icons/fi";
+import DeleteBookmarkModal from "../dashboard/writer/DeleteBookmarkModal";
 
 export function BookmarkedEbookCard({ bookmark }) {
   const { title, coverImage, writerName, ebookId, _id } = bookmark;
   
   console.log(bookmark)
   const actualEbookId = ebookId?.$oid || ebookId;
-  const bookmarkId = _id?.$oid || _id;
-
-  const handleOnRemove = async()=>{
-    // todo : delete functionality
-  }
+  
 
   return (
     <Card
@@ -38,17 +35,7 @@ export function BookmarkedEbookCard({ bookmark }) {
           />
         </div>
 
-        {/* বুকমার্ক রিমুভ করার কুইক বাটন */}
-        <Button
-          isIconOnly
-          size="sm"
-          variant="flat"
-          onClick={handleOnRemove}
-          className="absolute top-5 right-5 z-10 bg-white/80 hover:bg-red-50 text-zinc-600 hover:text-red-600 backdrop-blur-sm min-w-8 h-8 rounded-full shadow-xs transition-colors"
-          title="Remove Bookmark"
-        >
-          <FiTrash2 size={14} />
-        </Button>
+        <DeleteBookmarkModal ebook={bookmark} />
       </Card.Content>
 
       {/* Card Header Section for Titles */}

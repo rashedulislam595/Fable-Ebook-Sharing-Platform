@@ -12,20 +12,20 @@ export function EbooksTableList({ initialEbooks }) {
   const [isPending, startTransition] = useTransition();
 
   // Handle Toggle Publish/Unpublish
-  const handleTogglePublish = (ebookId, currentStatus) => {
-    const nextStatus = currentStatus === "published" ? "unpublished" : "published";
-    if (confirm(`Are you sure you want to change this ebook status to ${nextStatus}?`)) {
-      startTransition(async () => {
-        // API Call here
-        setEbooks((prev) =>
-          prev.map(ebook => {
-            const id = ebook._id?.$oid || ebook._id;
-            return id === ebookId ? { ...ebook, status: nextStatus } : ebook;
-          })
-        );
-      });
-    }
-  };
+  // const handleTogglePublish = (ebookId, currentStatus) => {
+  //   const nextStatus = currentStatus === "published" ? "unpublished" : "published";
+  //   if (confirm(`Are you sure you want to change this ebook status to ${nextStatus}?`)) {
+  //     startTransition(async () => {
+  //       // API Call here
+  //       setEbooks((prev) =>
+  //         prev.map(ebook => {
+  //           const id = ebook._id?.$oid || ebook._id;
+  //           return id === ebookId ? { ...ebook, status: nextStatus } : ebook;
+  //         })
+  //       );
+  //     });
+  //   }
+  // };
 
   return (
     <div className="w-full bg-white border border-zinc-200 shadow-sm rounded-xl overflow-hidden p-2 sm:p-4 ">
@@ -193,7 +193,7 @@ export function EbooksTableList({ initialEbooks }) {
 
                       <Table.Cell>
                         <div className="flex items-center gap-1">
-                          <Button
+                          {/* <Button
                             isIconOnly
                             size="sm"
                             variant="light"
@@ -206,7 +206,7 @@ export function EbooksTableList({ initialEbooks }) {
                             title={ebookStatus === "published" ? "Unpublish Ebook" : "Publish Ebook"}
                           >
                             {ebookStatus === "published" ? <EyeSlash width={15} height={15} /> : <Globe width={15} height={15} />}
-                          </Button>
+                          </Button> */}
 
                           <EditEbookModal ebook={ebook} />
 
