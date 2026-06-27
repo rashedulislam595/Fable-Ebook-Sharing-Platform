@@ -1,8 +1,7 @@
-import { serverFetch } from "../core/fetch"
 import { protectedFetch } from "../core/server"
 
 export const getAllPurchasesData = async()=>{
-    return serverFetch('/api/purchases')
+    return protectedFetch('/api/purchases')
 }
 
 export const getPurchasesByBuyerId = async(buyerId)=>{

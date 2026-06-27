@@ -1,8 +1,7 @@
+import { redirect } from "next/navigation";
 import { getUserToken } from "./session";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
-
-
 
 export const authHeader = async()=>{
     const token = await getUserToken()
@@ -10,6 +9,17 @@ export const authHeader = async()=>{
         authorization: `Bearer ${token}`
     }:{}
     return header
+}
+
+// handle 401 & 403
+export const handleStatusCode = async(res)=>{
+    console.log(res.status,"status")
+    if(res.status === 401){
+        redirect('/unauthorized')
+    }else if(res.status === 403){
+        redirect('/forbidden')
+    }
+    return res.json()
 }
 
 export const protectedFetch = async(api)=>{
@@ -29,6 +39,6 @@ export const serverMutation = async(api,newJobData,method = 'POST')=>{
         },
         body: JSON.stringify(newJobData)
     })
-    const data = await res.json();
+    const data = await handleStatusCode(res);
     return data;
 }

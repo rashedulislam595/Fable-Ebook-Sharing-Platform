@@ -1,6 +1,6 @@
-import { serverFetch } from "../core/fetch"
+import { protectedFetch } from "../core/server"
 
 
 export const getBookmarksByUserId = async(userId)=>{
-    return serverFetch(`/api/bookmarks?userId=${userId}`)
+    return protectedFetch(`/api/bookmarks?userId=${userId}`)
 }
