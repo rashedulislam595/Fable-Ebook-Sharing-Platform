@@ -2,30 +2,28 @@
 
 import React, { useState, useTransition } from 'react';
 import { Table, Chip, Button } from "@heroui/react";
-import { Pencil, TrashBin, Globe, EyeSlash} from "@gravity-ui/icons";
+import { Pencil, TrashBin, Globe, EyeSlash } from "@gravity-ui/icons";
 import Image from 'next/image';
 import DeleteManageEbooksModal from '../admin/DeleteManageEbooksModal';
 import EditEbookModal from './EditEbookModal';
+import { toast } from 'react-toastify';
 
 export function EbooksTableList({ initialEbooks }) {
   const [ebooks, setEbooks] = useState(initialEbooks);
   const [isPending, startTransition] = useTransition();
 
   // Handle Toggle Publish/Unpublish
-  // const handleTogglePublish = (ebookId, currentStatus) => {
-  //   const nextStatus = currentStatus === "published" ? "unpublished" : "published";
-  //   if (confirm(`Are you sure you want to change this ebook status to ${nextStatus}?`)) {
-  //     startTransition(async () => {
-  //       // API Call here
-  //       setEbooks((prev) =>
-  //         prev.map(ebook => {
-  //           const id = ebook._id?.$oid || ebook._id;
-  //           return id === ebookId ? { ...ebook, status: nextStatus } : ebook;
-  //         })
-  //       );
-  //     });
-  //   }
-  // };
+  const handleTogglePublish = (ebookId, currentStatus) => {
+    if (currentStatus === "published") {
+      toast.success(
+        "Your unpublish request has been submitted and is awaiting admin approval."
+      );
+    } else {
+      toast.success(
+        "Your publishing request has been submitted and is awaiting admin approval."
+      );
+    }
+  };
 
   return (
     <div className="w-full bg-white border border-zinc-200 shadow-sm rounded-xl overflow-hidden p-2 sm:p-4 ">
@@ -193,20 +191,20 @@ export function EbooksTableList({ initialEbooks }) {
 
                       <Table.Cell>
                         <div className="flex items-center gap-1">
-                          {/* <Button
+                          <Button
                             isIconOnly
                             size="sm"
                             variant="light"
                             disabled={isPending}
                             onClick={() => handleTogglePublish(ebookId, ebookStatus)}
                             className={`min-w-8 w-8 h-8 rounded-md transition-colors ${ebookStatus === "published"
-                                ? "text-zinc-500 hover:text-red-500 hover:bg-zinc-100"
-                                : "text-zinc-500 hover:text-emerald-600 hover:bg-zinc-100"
+                              ? "text-zinc-500 hover:text-red-500 hover:bg-zinc-100"
+                              : "text-zinc-500 hover:text-emerald-600 hover:bg-zinc-100"
                               }`}
                             title={ebookStatus === "published" ? "Unpublish Ebook" : "Publish Ebook"}
                           >
                             {ebookStatus === "published" ? <EyeSlash width={15} height={15} /> : <Globe width={15} height={15} />}
-                          </Button> */}
+                          </Button>
 
                           <EditEbookModal ebook={ebook} />
 
