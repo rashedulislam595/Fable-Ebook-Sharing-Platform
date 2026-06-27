@@ -1,8 +1,7 @@
 "use client";
 
 import React from 'react';
-import { Table, Chip, Button, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@heroui/react";
-import { EllipsisVertical, ArrowDownToLine, FileText } from "@gravity-ui/icons";
+import { Table, Chip, Button } from "@heroui/react";
 import Image from 'next/image';
 import NoPurchaseHistory from './NoPurchaseHistory';
 import Link from 'next/link';

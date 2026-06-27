@@ -1,4 +1,5 @@
-import { serverFetch } from "../core/server"
+import { serverFetch } from "../core/fetch"
+
 
 export const getAllEbooks = async (status)=>{
     return serverFetch(`/api/ebooks?status=${status}`)

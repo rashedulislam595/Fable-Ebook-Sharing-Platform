@@ -1,9 +1,10 @@
-import { serverFetch } from "../core/server"
+import { serverFetch } from "../core/fetch"
+import { protectedFetch } from "../core/server"
 
-export const getUsers = async() =>{
-    return serverFetch('/api/users')
+export const getUsers = async () => {
+    return protectedFetch('/api/users')
 }
 
-export const getAllUsersByAdmin = async()=>{
+export const getAllUsersByAdmin = async () => {
     return serverFetch('/api/admin/ebooks')
 }
