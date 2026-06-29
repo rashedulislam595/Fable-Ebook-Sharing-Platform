@@ -6,8 +6,10 @@ import { useState } from "react";
 import { Button, Spinner } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
+  const path = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { data: session, isPending } = authClient.useSession();
@@ -74,12 +76,12 @@ export default function Navbar() {
         {/* DESKTOP MENU */}
         <div className="hidden items-center gap-4 sm:flex">
           {/* LINKS */}
-          <div className="flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 p-1">
+          <div className="flex items-center gap-1 rounded-md border border-slate-200 bg-slate-50 p-1">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="rounded-full px-5 py-2 text-sm font-medium text-slate-600 transition-all duration-300 hover:bg-white hover:text-indigo-600 hover:shadow-sm"
+                className={`rounded-sm px-5 py-2 text-sm font-medium  transition-all duration-300 hover:bg-white hover:text-green-500 hover:shadow-sm ${path === link.href?'text-green-600  border-b-2 border-green-600 ':'text-slate-600'}`}
               >
                 {link.name}
               </Link>
@@ -156,7 +158,7 @@ export default function Navbar() {
               key={link.name}
               href={link.href}
               onClick={() => setIsMenuOpen(false)}
-              className="block text-sm font-medium text-slate-600 hover:text-indigo-600"
+              className={`block text-sm font-medium  hover:text-indigo-600 ${path === link.href?'text-green-600   ':'text-slate-600'} `}
             >
               {link.name}
             </Link>
